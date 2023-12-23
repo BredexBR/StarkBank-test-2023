@@ -2,6 +2,7 @@ import starkbank
 from flask import request
 
 class StarkTransfer:
+    
     def transfer():    
         event = starkbank.event.parse(
             content=request.data.decode("utf-8"),

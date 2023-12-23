@@ -4,17 +4,16 @@ from apscheduler.schedulers.background import BackgroundScheduler
 class receiveUser():
     def starkBankUser():
         private_key_content = """
-        CONTEUDO DA CHAVE PRIVADA
+        Informação da chave privada
         """
 
         # for project users:
         project = starkbank.Project(
             environment="sandbox",
-            id="id do sandbox",
+            id="id do ambiente sandbox",
             private_key=private_key_content
         )
         starkbank.user = project
-
 
 class backgroundTime():    
     def schedule_time():

@@ -1,7 +1,6 @@
 from Infrastructure.server import receiveUser
 from Application.checkWebHook import webHook
 from Application.addInvoice import AddInvoice
-#from Application import  transfer
 
 class invoiceController:
     def controller():
@@ -9,10 +8,12 @@ class invoiceController:
         verifyUser = webHook.checkWebHook()
 
         if verifyUser != "erro":
+            
             #server.schedule_time()
-            starkInvoice = AddInvoice.addInvoice()
-            for invoice in starkInvoice:
-                print(invoice)
+            AddInvoice.addInvoice()
+            #for invoice in starkInvoice:
+            #    print(invoice)
+            #StarkTransfer.transfer()
   
         else:
             print("Não foi possível encontrar webhook válido")
