@@ -8,7 +8,8 @@ class webHook:
             return webhook
 
         except Exception as e:
-            webhook = "erro: ", e 
+            print("erro: ", e )
+            webhook = "erro" 
             return webhook
             
         

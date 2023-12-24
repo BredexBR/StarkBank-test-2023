@@ -1,8 +1,10 @@
 import starkbank
-from flask import request
+from flask import request, Flask 
 
-class StarkTransfer:
-    
+class StarkTransfer():
+    app = Flask(__name__)
+
+    @app.route('/webhook/invoice', methods=['POST'])
     def transfer():    
         event = starkbank.event.parse(
             content=request.data.decode("utf-8"),

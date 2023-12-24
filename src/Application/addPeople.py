@@ -38,5 +38,5 @@ class addPeople:
                 return people("Katia", "937.967.880-09")
 
             case 12:
-                return people("Larissa", "052.786.420-09")
+                return people("Lucas", "052.786.420-09")
     

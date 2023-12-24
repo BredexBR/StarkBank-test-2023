@@ -3,11 +3,12 @@ import sys
 path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
 
-from flask import Flask         
-import Domain.invoice
+import starkbank
+from flask import request, Flask
+from Adapters.invoiceController import invoiceController
 
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    Domain.invoice.invoiceDomain()
+    invoiceController.controller()
     app.run(debug=True)

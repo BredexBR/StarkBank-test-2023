@@ -1,20 +1,19 @@
-from Infrastructure.server import receiveUser
+from Infrastructure.server import receiveUser, backgroundTime
 from Application.checkWebHook import webHook
-from Application.addInvoice import AddInvoice
 
 class invoiceController:
     def controller():
-        receiveUser.starkBankUser()
-        verifyUser = webHook.checkWebHook()
+        try:
+            receiveUser.starkBankUser()
+            verifyUser = webHook.checkWebHook()
 
-        if verifyUser != "erro":
-            
-            #server.schedule_time()
-            AddInvoice.addInvoice()
-            #for invoice in starkInvoice:
-            #    print(invoice)
-            #StarkTransfer.transfer()
-  
-        else:
-            print("Não foi possível encontrar webhook válido")
+            if verifyUser != "erro":
+                backgroundTime.schedule_time()
+                #for invoice in starkInvoice:
+                #    print(invoice)
+                #StarkTransfer.transfer()
     
+            else:
+                print("Não foi possível encontrar webhook válido")
+        except Exception as e:
+            print ("erro: ", e)
