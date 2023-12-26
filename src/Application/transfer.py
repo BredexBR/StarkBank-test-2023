@@ -1,17 +1,14 @@
 import starkbank
-from flask import request, Flask 
+from flask import request
 
 class StarkTransfer():
-    app = Flask(__name__)
-
-    @app.route('/webhook/invoice', methods=['POST'])
-    def transfer():    
+    def makeTransfer():    
         event = starkbank.event.parse(
             content=request.data.decode("utf-8"),
             signature=request.headers["Digital-Signature"],
         )
 
-        if event.subscription == "invoice" and event.log.type == "credited":
+        if event.subscription == "invoice" and event.log.type == "created":
             transfers = starkbank.transfer.create([
                 starkbank.Transfer(
                     amount=event.log.invoice.amount,
@@ -20,6 +17,7 @@ class StarkTransfer():
                     bank_code="20018183",
                     branch_code="0001",
                     account_number="6341320293482496",
-                )
+            )
             ])
-            print (transfers)        
+            print (transfers)
+

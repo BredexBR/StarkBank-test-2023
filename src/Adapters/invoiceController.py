@@ -1,19 +1,23 @@
+from flask import Response
 from Infrastructure.server import receiveUser, backgroundTime
 from Application.checkWebHook import webHook
+from Application.transfer import StarkTransfer
 
 class invoiceController:
-    def controller():
+    def controller(app):
         try:
             receiveUser.starkBankUser()
-            verifyUser = webHook.checkWebHook()
+            check = webHook.checkWebHook()
 
-            if verifyUser != "erro":
-                backgroundTime.schedule_time()
-                #for invoice in starkInvoice:
-                #    print(invoice)
-                #StarkTransfer.transfer()
-    
+            if check != "erro":
+                backgroundTime.schedule_time()                    
             else:
                 print("Não foi possível encontrar webhook válido")
         except Exception as e:
             print ("erro: ", e)
+    
+        @app.route('/webhook/transfer', methods=['POST'])
+        def transfer_handle():
+            StarkTransfer.makeTransfer()
+            return Response(status=200)
+    
