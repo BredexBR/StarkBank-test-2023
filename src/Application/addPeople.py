@@ -1,4 +1,4 @@
-from Domain.people import people
+from ..Domain.people import people
 
 class addPeople:
     def addPeople(numberRandom):
@@ -39,4 +39,3 @@ class addPeople:
 
             case 12:
                 return people("Lucas", "052.786.420-09")
-    

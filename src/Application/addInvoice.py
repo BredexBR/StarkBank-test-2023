@@ -1,7 +1,7 @@
 import starkbank
 import random
-from Domain.people import people
-from Application.addPeople import addPeople
+from ..Domain.people import people
+from ..Application.addPeople import addPeople
 
 class AddInvoice:
     def addInvoice():

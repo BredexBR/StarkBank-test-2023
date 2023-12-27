@@ -4,7 +4,7 @@ path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
 
 from flask import Flask
-from Adapters.invoiceController import invoiceController
+from ..Adapters.invoiceController import invoiceController
 
 app = Flask(__name__)
 

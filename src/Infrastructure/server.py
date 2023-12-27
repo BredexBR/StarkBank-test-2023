@@ -2,7 +2,7 @@ import starkbank
 import os
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
-from Application.addInvoice import AddInvoice
+from ..Application.addInvoice import AddInvoice
 
 class receiveUser():
     def starkBankUser():
