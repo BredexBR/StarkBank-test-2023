@@ -10,4 +10,4 @@ app = Flask(__name__)
 
 if __name__ == "__main__":
     invoiceController.controller(app)
-    app.run(debug=True)
+    app.run()
