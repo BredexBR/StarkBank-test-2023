@@ -1,4 +1,5 @@
 import starkbank
+import os
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from Application.addInvoice import AddInvoice
@@ -9,10 +10,12 @@ class receiveUser():
         Informação da chave privada
         """
 
+        print("id do sandbox: ",os.getenv('idSandbox'))
         # for project users:
         project = starkbank.Project(
             environment="sandbox",
-            id="id do ambiente sandbox",
+            #id="id do ambiente sandbox",
+            id= os.getenv('idSandbox'),
             private_key=private_key_content
         )
         starkbank.user = project
