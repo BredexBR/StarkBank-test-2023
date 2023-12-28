@@ -1,7 +1,8 @@
 from flask import Response
-from ..Infrastructure.server import receiveUser, backgroundTime
-from ..Application.checkWebHook import webHook
-from ..Application.transfer import StarkTransfer
+from Infrastructure.server import receiveUser, backgroundTime
+from Infrastructure.conDatabase import conDatabase
+from Application.checkWebHook import webHook
+from Application.transfer import StarkTransfer
 
 class invoiceController:
     def controller(app):
@@ -10,11 +11,16 @@ class invoiceController:
             check = webHook.checkWebHook()
 
             if check != "erro":
-                backgroundTime.schedule_time()                    
+                conn = conDatabase.conDatabase()
+                if conn != "erro":
+                    backgroundTime.schedule_time(conn)
+                    conDatabase.closeDatabase(conn)
+                else:
+                    print("Não foi possível realizar a conexão com o banco de dados")
             else:
                 print("Não foi possível encontrar webhook válido")
         except Exception as e:
-            print ("erro: ", e)
+            print ("erro invoiceController: ", e)
     
         @app.route('/webhook/transfer', methods=['POST'])
         def transfer_handle():
