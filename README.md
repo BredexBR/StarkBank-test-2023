@@ -8,8 +8,11 @@ A proposta foi realizada com o [Visual Studio Code](https://code.visualstudio.co
 ## Bibliotecas/Ferramentas
 Foi necessário baixar a ferramenta [ngrok](https://ngrok.com/).
 
-E também a biblioteca flask:
+A biblioteca flask:
 > $ pip install flask
+
+E também a biblioteca psycopg2:
+> $ pip install psycopg2
 
 ## Configurações
 Seguindo o caminho /src/Infrastructure/server.py 
@@ -22,6 +25,28 @@ Precisara do id do projeto criado dentro do ambiente sandbox
 Seguindo o caminho /src/Application/checkWebHook.py
 Precisara do id do webhook criado dentro do ambiente sandbox
 > webHookSandbox = "id do webhook sandbox"
+
+Seguindo o caminho /src/Infrastructure/conDatabase.py sera necessário configurar as informações para conexão em seu banco de dados(postgres). No projeto para a criação da tabela sql foi utilizado o [railway](https://railway.app/)(banco de dados na nuvem e muitas outras coisas). [clique aqui](https://docs.railway.app/) caso tenha interesse em ler a documentação deles.
+
+Criar uma tabela(table) chamada people com 3 colunas id(int), name(text), cpf(text) e adicionar 12 linhas(rows). OBS: precisam ser cpf's validos.
+
+Entretanto caso não queira utilizar um banco de dados existe outra opção:
+primeiramente em /src/Adapters/invoiceController.py retire as seguintes linhas de código:
+> conn = conDatabase.conDatabase()
+
+> if conn != "erro":
+
+> conDatabase.closeDatabase(conn)
+
+> else:
+
+> print("Não foi possível realizar a conexão com o banco de dados")
+
+Após entrar em /src/Application/addInvoice.py trocar linha de código:
+> people = addPeopleDatabase.addPeopleDatabase(conn, numberRandom)
+
+Por
+> people = addPeople.addPeople(numberRandom)
 
 ## Executando o projeto
 Inicie o ngrok dentro de sua respectiva pasta
